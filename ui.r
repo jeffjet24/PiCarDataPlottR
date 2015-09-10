@@ -11,7 +11,7 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       dateRangeInput('dateRange', "Pick the Range of Dates you would like to 
-                     look at!", start = "1999-12-28", end = "2000-01-28")
+                     look at!", start = Sys.Date() - 30 , end = Sys.Date())
     ),
     
     # Show a plot of the generated distribution
