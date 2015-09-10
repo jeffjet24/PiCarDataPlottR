@@ -17,6 +17,7 @@ shinyServer(function(input, output) {
   speedSet <- select(carData, time = time, Speed = speed)
   speedData <- xts(x = speedSet$Speed, 
                    order.by = as.POSIXct(as.integer(speedSet$time), origin = "1970-01-01")) 
+  
   mafLoadData <- cbind(xts(x = mafLoadSet$MAF, 
                     order.by = as.POSIXct(as.integer(mafLoadSet$time), origin = "1970-01-01")),
                  xts(x = mafLoadSet$Load, 
@@ -37,7 +38,8 @@ shinyServer(function(input, output) {
     output$speedPlot <- renderDygraph({
       plot <- dygraph(speedData, "Speed in Km/h", xlab = "Time", 
                       ylab = "Speed in Km/h") %>%
-              dyAxis("y", valueRange = c(0, 200))
+              dyAxis("y", valueRange = c(0, 200)) %>%
+              dyOptions(fillGraph = TRUE)
       return(plot)
     })
     output$mafLoadPlot <- renderDygraph({
