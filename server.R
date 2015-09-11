@@ -35,6 +35,7 @@ shinyServer(function(input, output) {
 #   )
   observe({
     input$dateRange
+    # plotting all the speed plots
     output$speedPlot <- renderDygraph({
       plot <- dygraph(speedData, "Speed in Km/h", xlab = "Time", 
                       ylab = "Speed in Km/h") %>%
@@ -42,11 +43,13 @@ shinyServer(function(input, output) {
               dyOptions(fillGraph = TRUE)
       return(plot)
     })
+    # plotting the maf/load plot
     output$mafLoadPlot <- renderDygraph({
       plot <- dygraph(mafLoadData, "MAF and Load", xlab = "Time", 
                       ylab = "MAF and Load")
       return(plot)
     })
+    # plotting the plot for all the fuel trims
     output$fuelTrimPlot <- renderDygraph({
       plot <- dygraph(fuelTrimData, "Fuel Trim Levels", xlab = "Time", 
                       ylab = "Fuel Trim Units")
