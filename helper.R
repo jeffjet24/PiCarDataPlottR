@@ -6,7 +6,7 @@ retrieveCarData <- function(csvPath){
   
   
   # loading in my car data from the output.csv file
-  carData <- read.csv("output.csv", TRUE, stringsAsFactors = FALSE)
+  carData <- read.csv(csvPath, TRUE, stringsAsFactors = FALSE)
   # filtering the data set of the headers
   carData <- filter(carData, time !="time") 
   carData <- removeAllBadData(carData)
