@@ -35,3 +35,23 @@ removeAllBadData <- function(dataTable){
   return(dataTable)
 }
 
+
+combineDataToXts <- function(dataSet){
+  
+  xtsData <- xts(x = dataSet[[2]], order.by = as.POSIXct(as.integer(dataSet$time), 
+                                       origin = "1970-01-01"))
+
+  if(NCOL(dataSet) == 2){
+    colnames(xtsData) <- colnames(dataSet)[2]
+  }else{
+    for(i in 3:NCOL(dataSet)){
+      xtsData <- cbind(xtsData, 
+                       xts(x = dataSet[[i]], 
+                           order.by = as.POSIXct(as.integer(dataSet$time), 
+                                                 origin = "1970-01-01")))
+    }
+      colnames(xtsData) <- colnames(dataSet)[2:NCOL(dataSet)]
+  }
+
+  return(xtsData)
+}
