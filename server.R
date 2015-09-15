@@ -9,7 +9,6 @@ shinyServer(function(input, output) {
   # getting the car Data
   carData <- retrieveCarData("/var/dataLogging/output.csv")
   # carData <- retrieveCarData("output.csv") # for local programming
-  #browser()
   mafLoadSet <- select(carData, time = time, MAF = maf, Load = load)
   fuelTrimSet <- select(carData, time = time,
                                  ShortTrim1 = short_term_fuel_trim_1,
@@ -31,9 +30,9 @@ shinyServer(function(input, output) {
     input$dateRange
     # plotting all the speed plots
     output$speedPlot <- renderDygraph({
-      plot <- dygraph(speedData, "Speed in Km/h", xlab = "Time", 
-                      ylab = "Speed in Km/h", group = "engineData") %>%
-              dyAxis("y", valueRange = c(0, 200)) %>%
+      plot <- dygraph(speedData, "Speed in Mph", xlab = "Time", 
+                      ylab = "Speed in Mph", group = "engineData") %>%
+              #dyAxis("y", valueRange = c(0, 120)) %>%
               dyOptions(fillGraph = TRUE)
       return(plot)
     })
@@ -59,7 +58,7 @@ shinyServer(function(input, output) {
     # plotting the maf/load plot
     output$mafLoadPlot <- renderDygraph({
       plot <- dygraph(mafLoadData, "MAF and Load", xlab = "Time", 
-                      ylab = "MAF and Load", group = "engineData")
+                      ylab = "MAF (grams/sec) and Load (%)", group = "engineData")
       return(plot)
     })
   })

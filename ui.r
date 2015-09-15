@@ -16,10 +16,14 @@ shinyUI(fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-      dygraphOutput("speedPlot"),
-      dygraphOutput("rpmPlot"),
-      dygraphOutput("tempPlot"),
-      dygraphOutput("fuelTrimPlot"),
+      fluidRow(
+        column(6, dygraphOutput("speedPlot")),
+        column(6, dygraphOutput("rpmPlot"))
+      ),
+      fluidRow(
+        column(6, dygraphOutput("tempPlot")),
+        column(6, dygraphOutput("fuelTrimPlot"))
+      ),
       dygraphOutput("mafLoadPlot")
     )
   )

@@ -28,11 +28,11 @@ removeAllBadData <- function(dataTable){
             dataTable[[i]][[j]] <- as.numeric(dataTable[[i]][[j-1]])
           }
         }
-        
       } 
     }
   }
   dataTable[is.na(dataTable)] <- "0"
+  dataTable$speed <- as.numeric(dataTable$speed) * 0.621371 # converting km/h to mph
   return(dataTable)
 }
 
@@ -56,3 +56,6 @@ combineDataToXts <- function(dataSet){
 
   return(xtsData)
 }
+
+
+
