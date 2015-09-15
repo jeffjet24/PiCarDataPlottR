@@ -7,7 +7,8 @@ source("helper.R")
 shinyServer(function(input, output) {
   
   # getting the car Data
-  carData <- retrieveCarData("output.csv")
+  carData <- retrieveCarData("/var/dataLogging/output.csv")
+  # carData <- retrieveCarData("output.csv") # for local programming
   #browser()
   mafLoadSet <- select(carData, time = time, MAF = maf, Load = load)
   fuelTrimSet <- select(carData, time = time,
@@ -40,7 +41,7 @@ shinyServer(function(input, output) {
     output$rpmPlot <- renderDygraph({
       plot <- dygraph(rpmData, "Rotations Per Minute", xlab = "Time", 
                       ylab = "Rotations Per Minute", group = "engineData") %>%
-              dyAxis("y", valueRange = c(800, 4000))
+              dyAxis("y", valueRange = c(0, 5000))
       return(plot)
     })
     # plotting the temperature plot
