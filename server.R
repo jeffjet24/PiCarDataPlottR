@@ -3,11 +3,12 @@ library(dplyr)
 library(dygraphs)
 library(xts)
 source("helper.R")
-# Define server logic required to draw a histogram
+# Define server logic for the shiny application
 shinyServer(function(input, output) {
   
   # getting the car Data
   carData <- retrieveCarData("output.csv")
+  #browser()
   mafLoadSet <- select(carData, time = time, MAF = maf, Load = load)
   fuelTrimSet <- select(carData, time = time,
                                  ShortTrim1 = short_term_fuel_trim_1,

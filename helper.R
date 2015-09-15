@@ -32,6 +32,7 @@ removeAllBadData <- function(dataTable){
       } 
     }
   }
+  dataTable[is.na(dataTable)] <- "0"
   return(dataTable)
 }
 
