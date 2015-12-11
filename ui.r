@@ -18,7 +18,7 @@ shinyUI(fluidPage(
     mainPanel(
       fluidRow(
         column(6, dygraphOutput("speedPlot")),
-        column(6, dygraphOutput("rpmPlot"))
+        column(6, plotOutput("rpmPlot"))
       ),
       fluidRow(
         column(6, dygraphOutput("tempPlot")),
