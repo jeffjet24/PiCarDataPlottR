@@ -8,8 +8,8 @@ source("helper.R")
 shinyServer(function(input, output) {
   
   # getting the car Data
-  #carData <- retrieveCarData("/var/dataLogging/output.csv")
-  carData <- retrieveCarData("output.csv") # for local programming
+  carData <- retrieveCarData("/var/dataLogging/output.csv")
+  #carData <- retrieveCarData("output.csv") # for local programming
   mafLoadSet <- select(carData, time = time, MAF = maf, Load = load)
   fuelTrimSet <- select(carData, time = time,
                                  ShortTrim1 = short_term_fuel_trim_1,
