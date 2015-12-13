@@ -9,7 +9,7 @@ shinyServer(function(input, output) {
   
   # getting the car Data
   #carData <- retrieveCarData("/var/dataLogging/output.csv")
-   carData <- retrieveCarData("output.csv") # for local programming
+  carData <- retrieveCarData("output.csv") # for local programming
   mafLoadSet <- select(carData, time = time, MAF = maf, Load = load)
   fuelTrimSet <- select(carData, time = time,
                                  ShortTrim1 = short_term_fuel_trim_1,
@@ -21,49 +21,49 @@ shinyServer(function(input, output) {
   rpmSet <- select(carData, time = time, RPM = rpm)
   
   
-  speedData <- speedSet#combineDataToXts(speedSet)
-  rpmData <- rpmSet#combineDataToXts(rpmSet)
-  tempData <- tempSet#combineDataToXts(tempSet)
-  fuelTrimData <- fuelTrimSet#combineDataToXts(fuelTrimSet)
-  mafLoadData <- mafLoadSet#combineDataToXts(mafLoadSet)
+  speedData <- combineDataToXts(speedSet)
+  rpmData <- combineDataToXts(rpmSet)
+  tempData <- combineDataToXts(tempSet)
+  fuelTrimData <- combineDataToXts(fuelTrimSet)
+  mafLoadData <- combineDataToXts(mafLoadSet)
   
   observe({
     input$dateRange
     # plotting all the speed plots
     output$speedPlot <- renderDygraph({
-#       plot <- dygraph(speedData, "Speed in Mph", xlab = "Time", 
-#                       ylab = "Speed in Mph", group = "engineData") %>%
-#               #dyAxis("y", valueRange = c(0, 120)) %>%
-#               dyOptions(fillGraph = TRUE)
-#       return(plot)
+      plot <- dygraph(speedData, "Speed in Mph", xlab = "Time", 
+                      ylab = "Speed in Mph", group = "engineData") %>%
+              #dyAxis("y", valueRange = c(0, 120)) %>%
+              dyOptions(fillGraph = TRUE)
+      return(plot)
     })
     # plotting the rpm plot
     output$rpmPlot <- renderPlot({
-      browser()
-      colnames(rpmData) <- c("date", "value")
-      plot <- plot_ly(rpmData)
+#       browser()
+#       colnames(rpmData) <- c("date", "value")
+#       plot <- plot_ly(rpmData)
 #       plot <- dygraph(rpmData, "Rotations Per Minute", xlab = "Time", 
 #                       ylab = "Rotations Per Minute", group = "engineData") %>%
 #               dyAxis("y", valueRange = c(0, 5000))
-      return(plot)
+      #return(plot)
     })
     # plotting the temperature plot
     output$tempPlot <- renderDygraph({
-#       plot <- dygraph(tempData, "Temperature in Celsius", xlab = "Time", 
-#                       ylab = "Temperature in Celsius", group = "engineData")
-#       return(plot)
+      plot <- dygraph(tempData, "Temperature in Celsius", xlab = "Time", 
+                      ylab = "Temperature in Celsius", group = "engineData")
+      return(plot)
     })
     # plotting the plot for all the fuel trims
     output$fuelTrimPlot <- renderDygraph({
-#       plot <- dygraph(fuelTrimData, "Fuel Trim Levels", xlab = "Time", 
-#                       ylab = "Fuel Trim Units", group = "engineData")
-#       return(plot)
+      plot <- dygraph(fuelTrimData, "Fuel Trim Levels", xlab = "Time", 
+                      ylab = "Fuel Trim Units", group = "engineData")
+      return(plot)
     })
     # plotting the maf/load plot
     output$mafLoadPlot <- renderDygraph({
-#       plot <- dygraph(mafLoadData, "MAF and Load", xlab = "Time", 
-#                       ylab = "MAF (grams/sec) and Load (%)", group = "engineData")
-#       return(plot)
+      plot <- dygraph(mafLoadData, "MAF and Load", xlab = "Time", 
+                      ylab = "MAF (grams/sec) and Load (%)", group = "engineData")
+      return(plot)
     })
   })
   
